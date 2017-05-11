@@ -1,21 +1,13 @@
-angular.module('alurapic').controller('FotosController', function($scope) {
+angular.module('alurapic').controller('FotosController', function($scope, $http) {
 
-	$scope.fotos = [
-		{
-			titulo: "Guitar",
-			url: "http://www.namoral.com.br/blog/wp-content/uploads/2011/05/guitarra-02.jpg"
-		},
-		{
-			titulo: "Jimi Hendrix",
-			url: "http://www.vandohalen.com.br/wp-content/uploads/2013/11/jimi-hendrix-lovers-4131.jpg"
-		},
-		{
-			titulo: "John Frusciante",
-			url: "https://pxhst.co/avaxhome/d4/40/002940d4.jpeg"
-		},
-		{
-			titulo: "Pink Floyd",
-			url: "http://www.rockcabeca.com/wp-content/uploads/2016/12/image002.jpg"
-		}
-	]
+	$scope.fotos = [];
+
+	$http.get('v1/fotos')
+	.success(function(fotos){
+		$scope.fotos = fotos;
+
+	}).error(function(erro){
+		console.log(erro);
+	})
+
 });
